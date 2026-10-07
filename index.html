@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Yaumul Milad, Nur Cahyani</title>
+    <meta
+      name="description"
+      content="Ada sesuatu untukmu, Ummah. Selamat Yaumul Milad ke-29, dari Suami Tercinta."
+    />
+    <meta name="theme-color" content="#f3eadb" />
+
+    <!-- Open Graph: untuk preview link di WhatsApp.
+       Setelah di-hosting, ganti "foto.jpg" jadi URL lengkap, mis. https://domainmu/foto.jpg -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Yaumul Milad, Nur Cahyani" />
+    <meta
+      property="og:description"
+      content="Ada sesuatu untukmu, Ummah. Dari Suami Tercinta."
+    />
+    <meta property="og:image" content="foto.jpg" />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="1280" />
+    <meta property="og:locale" content="id_ID" />
+
+    <!-- Penanda JS aktif: tanpa JS, semua konten langsung tampil -->
+    <script>
+      document.documentElement.classList.add('js', 'is-locked');
+    </script>
+    <noscript
+      ><style>
+        .gate {
+          display: none !important;
+        }
+        .mask__in {
+          transform: none !important;
+        }
+        [data-reveal] {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      </style></noscript
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Mrs+Saint+Delafield&display=swap"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preload" as="image" href="foto.jpg" />
+  </head>
+  <body>
+    <!-- Definisi SVG yang dipakai ulang: bintang segi delapan (rub el hizb) dan lengkung mihrab -->
+    <svg
+      width="0"
+      height="0"
+      style="position: absolute"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <defs>
+        <symbol id="star8" viewBox="-50 -50 100 100">
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linejoin="miter"
+            d="M-35.36 -35.36H35.36V35.36H-35.36Z M0 -50L50 0L0 50L-50 0Z"
+          />
+          <circle r="7" fill="currentColor" />
+        </symbol>
+      </defs>
+    </svg>
+
+    <!-- ============ Latar halus: partikel + grain ============ -->
+    <canvas id="dust" class="dust" aria-hidden="true"></canvas>
+    <div class="grain" aria-hidden="true"></div>
+
+    <!-- ============ 0. GERBANG ============ -->
+    <div class="gate" id="gate">
+      <div class="gate__door gate__door--l" aria-hidden="true"></div>
+      <div class="gate__door gate__door--r" aria-hidden="true"></div>
+
+      <div class="gate__center">
+        <p class="gate__kicker">Untuk Ummah</p>
+        <button
+          class="seal"
+          id="open"
+          type="button"
+          aria-label="Buka hadiah: ketuk untuk membuka"
+        >
+          <svg class="seal__arch" viewBox="0 0 200 280" aria-hidden="true">
+            <!-- lengkung mihrab berlapis -->
+            <path
+              class="seal__line"
+              d="M16 270V120C16 62 56 24 100 8C144 24 184 62 184 120V270Z"
+            />
+            <path
+              class="seal__line seal__line--thin"
+              d="M32 270V122C32 72 64 40 100 26C136 40 168 72 168 122V270Z"
+            />
+            <g class="seal__star" transform="translate(100 150)">
+              <use href="#star8" x="-46" y="-46" width="92" height="92" />
+            </g>
+          </svg>
+        </button>
+        <h1 class="gate__title">Ada sesuatu<br />untukmu, <em>Ummah.</em></h1>
+        <p class="gate__hint">ketuk lengkungan untuk membuka</p>
+      </div>
+    </div>
+
+    <main id="main">
+      <!-- ============ 1. HERO ============ -->
+      <header class="hero" id="top">
+        <div class="wrap hero__grid">
+          <p class="hero__eyebrow" data-reveal>
+            <span class="num">Yaumul Milad ke-29</span>
+            <span class="hero__arab" lang="ar" dir="rtl"
+              >يَوْمُ الْمِيلَاد</span
+            >
+          </p>
+
+          <h1 class="hero__title" aria-label="Yaumul Milad">
+            <span class="mask"
+              ><span class="mask__in" style="--i: 0">Yaumul</span></span
+            >
+            <span class="mask"
+              ><span class="mask__in" style="--i: 1"><em>Milad</em></span></span
+            >
+          </h1>
+
+          <figure class="hero__photo frame frame--leaf" id="heroPhoto">
+            <span class="frame__echo" aria-hidden="true"></span>
+            <div class="frame__clip">
+              <div class="frame__par" data-parallax="0.05">
+                <div class="crop" style="--x: 46; --y: 46; --w: 360; --h: 396">
+                  <div class="crop__zoom">
+                    <img
+                      src="foto.jpg"
+                      width="1280"
+                      height="1280"
+                      fetchpriority="high"
+                      decoding="async"
+                      alt="Nur Cahyani berhijab merah marun tersenyum, pipinya menempel pada pipi putrinya yang juga berhijab merah"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </figure>
+
+          <p class="hero__name" aria-label="Nur Cahyani">
+            <span class="mask"
+              ><span class="mask__in" style="--i: 2">Nur</span></span
+            >
+            <span class="mask"
+              ><span class="mask__in" style="--i: 3">Cahyani</span></span
+            >
+          </p>
+
+          <div class="hero__meta" data-reveal style="--d: 1100ms">
+            <p class="hero__age">
+              <span>29</span><small>tahun,<br />genap</small>
+            </p>
+            <p class="hero__date">
+              <time datetime="2026-10-08">Kamis, 8 Oktober 2026</time>
+              <span>27 Rabiul Akhir 1448 H</span>
+            </p>
+          </div>
+
+          <p
+            class="hero__scroll"
+            data-reveal
+            style="--d: 1400ms"
+            aria-hidden="true"
+          >
+            <span>gulir pelan</span><i></i>
+          </p>
+        </div>
+      </header>
+
+      <hr class="rule" aria-hidden="true" />
+
+      <!-- ============ 2. SURAT ============ -->
+      <section class="letter section" aria-labelledby="h-letter">
+        <div class="wrap letter__grid">
+          <div class="section__head" data-reveal>
+            <span class="num">01</span>
+            <h2 id="h-letter" class="section__title">Surat</h2>
+          </div>
+
+          <figure class="stamp" data-reveal aria-label="Foto kenangan">
+            <div class="stamp__paper">
+              <div class="crop" style="--x: 918; --y: 880; --w: 316; --h: 354">
+                <div class="crop__zoom">
+                  <img
+                    src="foto.jpg"
+                    width="1280"
+                    height="1280"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Ummah memeluk anaknya yang berkerudung biru muda, pipinya bersandar di kepala si kecil"
+                  />
+                </div>
+              </div>
+            </div>
+            <!-- cap pos: tanggal -->
+            <svg class="stamp__mark" viewBox="0 0 120 120" aria-hidden="true">
+              <defs>
+                <path
+                  id="ring"
+                  d="M60 60m-44 0a44 44 0 1 1 88 0a44 44 0 1 1 -88 0"
+                />
+              </defs>
+              <circle
+                cx="60"
+                cy="60"
+                r="55"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.2"
+              />
+              <circle
+                cx="60"
+                cy="60"
+                r="31"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1"
+              />
+              <text
+                font-size="9.5"
+                letter-spacing="3.2"
+                fill="currentColor"
+                font-family="Newsreader, serif"
+              >
+                <textPath href="#ring">YAUMUL MILAD · 8 OKT 2026 ·</textPath>
+              </text>
+              <text
+                x="60"
+                y="68"
+                text-anchor="middle"
+                font-size="22"
+                fill="currentColor"
+                font-family="Fraunces, serif"
+                font-style="italic"
+              >
+                29
+              </text>
+            </svg>
+          </figure>
+
+          <div class="letter__body prose" data-stagger>
+            <p class="typed" id="typed" data-reveal aria-label="Ummah sayang,">
+              <span class="typed__ghost" aria-hidden="true">Ummah sayang,</span>
+              <span class="typed__live" aria-hidden="true"></span>
+            </p>
+
+            <!-- ═══ GANTI PESAN DI BAWAH INI DENGAN KATA-KATAMU SENDIRI ═══ -->
+            <p class="dropcap" data-reveal>
+              Barakallahu fii ’umrik, sayang. Dua puluh sembilan tahun, dan aku
+              bersyukur kamu ada di rumah kita. Terima kasih sudah mengurus kami
+              dengan sabar, bahkan di hari-hari ketika kamu sendiri sedang
+              lelah.
+            </p>
+            <p data-reveal>
+              Sekarang Ummah sedang membawa adik untuk Hana, aku tahu itu tidak
+              ringan. Tapi lihat Hana, dia tumbuh dengan banyak sekali sayang
+              dari ibunya. Istirahat yang cukup ya, dan jangan sungkan minta
+              tolong.
+            </p>
+            <p class="letter__end" data-reveal>
+              <span lang="ar" dir="rtl">بَارَكَ اللّٰهُ فِي عُمْرِكِ</span>
+              <em>Barakallahu fii ’umrik, Ummah.</em>
+            </p>
+            <!-- ═══ AKHIR PESAN ═══ -->
+          </div>
+        </div>
+      </section>
+
+      <hr class="rule" aria-hidden="true" />
+
+      <!-- ============ 3. YANG SAYA SYUKURI ============ -->
+      <section class="thanks section" aria-labelledby="h-thanks">
+        <div class="wrap">
+          <div class="section__head" data-reveal>
+            <span class="num">02</span>
+            <h2 id="h-thanks" class="section__title">Untuk <em>Ummmah</em></h2>
+          </div>
+
+          <ol class="thanks__list">
+            <li class="thank" data-reveal>
+              <span class="thank__n" aria-hidden="true">1</span>
+              <p class="thank__t">
+                Terima kasih sudah menjadi istri yang baik dan perhatian.
+              </p>
+            </li>
+
+            <li class="thank thank--photo" data-reveal>
+              <span class="thank__n" aria-hidden="true">2</span>
+              <p class="thank__t">
+                Terima kasih telah menjadi ibu yang sangat sayang sama Hana.
+              </p>
+              <figure class="frame frame--arch thank__fig">
+                <div class="frame__clip">
+                  <div
+                    class="crop"
+                    style="--x: 442; --y: 442; --w: 396; --h: 396"
+                  >
+                    <div class="crop__zoom">
+                      <img
+                        src="foto.jpg"
+                        width="1280"
+                        height="1280"
+                        loading="lazy"
+                        decoding="async"
+                        alt="Hana berdiri di halaman sambil memeluk boneka jerapah, menatap kamera dengan serius"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </figure>
+            </li>
+
+            <li class="thank thank--prayer" data-reveal>
+              <span class="thank__n" aria-hidden="true">3</span>
+              <p class="thank__t">
+                Semoga Ummah selalu dalam lindungan Allah SWT, dan semoga
+                kehamilan anak kedua ini dimudahkan dan dilancarkan sampai hari
+                kelahirannya, dengan Ummah dan si kecil sehat selalu.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ============ 4. DOA ============ -->
+      <section class="doa section" aria-labelledby="h-doa">
+        <div class="doa__pattern" aria-hidden="true"></div>
+        <div class="wrap doa__wrap">
+          <svg class="doa__arch" viewBox="0 0 120 70" aria-hidden="true">
+            <path
+              d="M6 70V40C6 22 28 8 60 2C92 8 114 22 114 40V70"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1"
+            />
+            <path
+              d="M16 70V42C16 28 34 17 60 11C86 17 104 28 104 42V70"
+              fill="none"
+              stroke="currentColor"
+              stroke-width=".6"
+            />
+            <use
+              href="#star8"
+              x="48"
+              y="30"
+              width="24"
+              height="24"
+              style="color: var(--mauve)"
+            />
+          </svg>
+
+          <div class="section__head section__head--center" data-reveal>
+            <span class="num">03</span>
+            <h2 id="h-doa" class="section__title">Doa</h2>
+          </div>
+
+          <blockquote class="doa__quote" data-stagger>
+            <p class="doa__ar" lang="ar" dir="rtl" data-reveal>
+              رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ
+              أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا
+            </p>
+            <p class="doa__tr" data-reveal>
+              Rabbana hab lana min azwajina wa dzurriyyatina qurrata a’yunin
+              waj’alna lil-muttaqina imama.
+            </p>
+            <p class="doa__id" data-reveal>
+              “Ya Tuhan kami, anugerahkanlah kepada kami pasangan dan keturunan
+              kami sebagai penyejuk mata (kami), dan jadikanlah kami pemimpin
+              bagi orang-orang yang bertakwa.”
+            </p>
+            <footer class="doa__src" data-reveal>QS. Al-Furqan: 74</footer>
+          </blockquote>
+
+          <p class="doa__plain" data-reveal>
+            Ya Allah, lindungi Ummah dan si kecil di dalam kandungannya.
+            Mudahkan dan lancarkan sampai hari kelahirannya.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ 5. PENUTUP ============ -->
+      <footer class="closing section" aria-labelledby="h-closing">
+        <div class="wrap closing__wrap">
+          <div class="section__head section__head--center" data-reveal>
+            <span class="num">04</span>
+          </div>
+
+          <p class="closing__line" data-reveal>
+            Terima kasih sudah ada, Ummah.<br />
+            <em>Itu saja, dan itu sudah banyak sekali.</em>
+          </p>
+
+          <div class="sign" id="sign" data-reveal>
+            <p class="sign__from">dengan sepenuh hati,</p>
+            <div class="sign__ink">
+              <span class="sign__script">Suami Tercinta</span>
+            </div>
+            <svg
+              class="sign__flourish"
+              viewBox="0 0 260 24"
+              aria-hidden="true"
+              preserveAspectRatio="none"
+            >
+              <path
+                pathLength="1"
+                d="M2 16C40 6 70 4 108 11S190 20 258 6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.4"
+                stroke-linecap="round"
+              />
+            </svg>
+          </div>
+
+          <div class="amin" data-reveal>
+            <button class="amin__btn" id="amin" type="button">
+              <span class="amin__label">Aamiin</span>
+            </button>
+            <p class="amin__after" id="aminAfter" aria-live="polite"></p>
+          </div>
+
+          <p class="closing__fin" aria-hidden="true">
+            <svg width="22" height="22"><use href="#star8" /></svg>
+          </p>
+        </div>
+      </footer>
+    </main>
+
+    <!-- wadah kelopak untuk tombol Aamiin -->
+    <div class="petals" id="petals" aria-hidden="true"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
